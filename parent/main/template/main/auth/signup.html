@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">0
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Jflix | Sign-Up</title>
+</head>
+<body>
+	{%from "utils.html" import nav, with context%}
+	{{nav()}}
+    <form>
+    	{{form.csrf_token()}}
+    	{{form}}
+    </form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+body{
+	background: black;
+}
+h2{
+	border-bottom: 2px solid orange;
+	font-family:  'Martian Mono', monospace;
+	position: relative;
+}
+form{
+
+}
+input{
+	margin-top: 10px;
+
+}
+span{
+	margin-top: 10px ;
+	margin-bottom: 10px;
+}
+.login-controller{
+	background: #00000;
+	position: relative;
+	margin-top: 10%;
+	justify-content: center;
+	align-items: center;
+    border: none;
+    display:flex;
+}
+.login-text:focus{
+	border-bottom:5px solid green;
+}
+input[type='text']{
+	transition: .8s;
+	display:block;
+	width:100%;
+	outline:none;
+	border:none;
+	padding: 10px;
+}
+input[type='password']{
+	transition: .8s;
+	display:block;
+	width:100%;
+	outline:none;
+	border: none;
+	padding:10px;
+}
+label{
+	padding-top:20px;
+	font-size:1.1em;
+}
+#remember input{
+    background-color: #fff;
+}
+input[type='submit']{
+	padding:15px;
+	width:auto;
+	border-radius:10px;
+}
