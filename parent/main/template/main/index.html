@@ -8,6 +8,7 @@
 	<!-- Google tag (gtag.js) -->
 	<link rel="icon" type="images/x-icon" href="{{url_for('main.favicon')}}">
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7ME25FB1T"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.6.3.js')}}"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -22,28 +23,12 @@
 	{{nav()}}
 	<div id="intro-text">
 		<p>
-	        <img  src="{{url_for('static',filename='main/images/index-unsplash.jpg')}}" alt="movie">         	 
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-			molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
-			numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
-			optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
-			obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
-			nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,
-			tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,
-			quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos 
-			sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam
-			recusandae alias error harum maxime adipisci amet laborum. Perspiciatis 
-			minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit 
-			quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur 
-			fugiat, temporibus enim commodi iusto libero magni deleniti quod quam 
-			consequuntur! Commodi minima excepturi repudiandae velit hic maxime
-			doloremque. Quaerat provident commodi consectetur veniam similique ad 
-			earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo 
-			fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore 
-			suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab <wbr>laudantium</wbr>
-			modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam 
-			totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam 
-			quasi aliquam eligendi, placeat qui corporis!
+	        <img id='first-image'  src="{{url_for('static',filename='main/images/index-unsplash.jpg')}}" alt="movie">         	 
+			Welcome to our online video entertainment site, where you can immerse yourself in a world of endless entertainment and limitless possibilities! We are thrilled to offer you a wide selection of videos that cater to all your entertainment needs, whether you are looking for the latest movies, TV shows, documentaries, or viral videos that are taking the internet by storm.
+
+			Our platform is designed to provide you with a seamless and intuitive experience, making it easy to find and enjoy the content you love. We are committed to bringing you the best of the best, and our team of curators work tirelessly to source and deliver the most engaging and exciting content from all corners of the internet.
+
+			Whether you want to unwind after a long day at work, catch up on your favorite TV show, or explore new and exciting worlds through film, our platform has something for everyone. So, grab your popcorn and get ready to embark on a journey of entertainment, exploration, and discovery - all from the comfort of your own home. We can't wait to take you on this exciting journey!
 		</p>
 	</div>
 	<div id="intro-image">
@@ -52,6 +37,26 @@
 
 	{{footer()}}
 	<script type="text/javascript">
+		var list=[
+				//'/static/main/images/index-unsplash2.jpg',
+				'/static/main/images/index-unsplash.jpg',
+				'/static/main/images/index-unsplash3.jpg'
+				];
+		var img=$('#first-image');
+		$(document).ready(function(){
+			var images=0;
+			var next=images
+			const change_image=()=>{
+				if (next === list.length-1){
+					next=images;
+					img.attr({'src':list[next]});
+				}else{
+					next++;
+					img.attr({'src':list[next]});
+				}
+			}
+			setInterval(change_image,5000);
+		});// function ending
 		
 	</script>
 </body>

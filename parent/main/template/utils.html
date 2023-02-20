@@ -11,6 +11,9 @@
 			<span><a href="{{url_for('main.index')}}" id="appname">Jflix</a></span>
 			<ul class="nav-content">
 				{%if current_user.is_authenticated%}
+					{% if current_user.is_admin %}
+					   <li><a href="{{url_for('admin.home')}}">Admin</a></li>
+					{% endif %}
 					<li>
 						<a href="#">Home</a>
 					</li>
