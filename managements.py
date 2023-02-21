@@ -1,4 +1,5 @@
 import sys
+from click import Command
 
 args=sys.argv
 
@@ -12,6 +13,8 @@ def execute_from_command_line(app):
 		if arg:
 			if arg == "runserver":
 				runserver(app)
+			else:
+				Command('db')
 	except IndexError:
 		print("[commands]")
 		for func in func_command:

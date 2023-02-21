@@ -1,5 +1,5 @@
 from flask import render_template,url_for,redirect,request,flash,session
-from flask_login import current_user,login_user,logout_user
+from flask_login import current_user,login_user,logout_user,login_required
 from parent.main import main
 from parent.main.forms import LoginForm,SignUpUserForm
 from parent.admin.models import Admin
@@ -31,6 +31,10 @@ def login():
 		return dict(resp="data invalid")
 	return render_template("main/auth/signin.html",form=form)
 
+@main.route("/home")
+@login_required
+def home():
+	return "<h1>Jflix home for videos in the land of myth and the time of magic the destiny of a great</h1>"
 
 @main.route('/sign-out')
 @main.route('/logout')
