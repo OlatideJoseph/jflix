@@ -24,12 +24,16 @@ def create_app():
 	migrate.init_app(app,db)
 	moment.init_app(app)
 	login_manager.init_app(app)
+	#Application blueprint register
 	from parent.admin import admin
 	app.register_blueprint(admin,url_prefix='/admin/section')
 	from parent.main.urls import main
 	app.register_blueprint(main)
 	from parent.post.urls import posts
 	app.register_blueprint(posts,url_prefix='/post')
+	from parent.uploader.urls import uploader
+	app.register_blueprint(uploader,url_prefix='/uploader')
+	#Application context processor
 	from parent.main.models import User,Post,Comment
 	from parent.admin.models import Admin
 	@app.shell_context_processor

@@ -1,3 +1,4 @@
+import json
 from threading import Thread
 from datetime import datetime
 import datetime as dt
@@ -149,6 +150,10 @@ class Movie(db.Model):
 	user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
 	movie_like=db.relationship('MovieLike',backref='movie_liked',lazy=True)
 	comments=db.relationship("Comment",backref="movies",lazy=True)
+
+
+	def tojson(self):
+		movie_dict={"id":self.id,}
 
 class Comment(db.Model):
     __tablename__="comment"

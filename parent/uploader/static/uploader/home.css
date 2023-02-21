@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300&family=Source+Code+Pro:ital,wght@0,200;1,200&display=swap');
+body{
+	margin:0px;
+	background:#202124/*black*/;
+	padding: 0;
+	color:gray;
+}
+#nav{
+	background:black;/*#1b1c15;/*:whitesmoke*/
+	padding:10px;
+	font-family: 'Source code pro',monospace;
+}
+#nav ul{
+	background: darkgrey;
+	position:relative;
+	padding:10px ;
+	border-radius: 5px;
+	float:right;
+	width: 250px;
+}
+#nav li{
+	list-style-type: none;
+	padding:5px;
+	width: auto;
+}
+#nav a{
+	text-decoration: none;
+	color:lightgrey;
+}
+#nav a:visited{
+    color: lightgrey;
+}
+#nav li:hover{
+	background: deepskyblue;
+	border-radius:0 10px 10px 0;
+}
+
+
