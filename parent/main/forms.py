@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
-from wtforms import StringField,BooleanField,SubmitField,PasswordField,BooleanField,TextAreaField
+from wtforms import (StringField,BooleanField,SubmitField,PasswordField,
+					BooleanField,TextAreaField,SelectField,RadioField)
 from wtforms.validators import DataRequired,Length,EqualTo,Email,Regexp,ValidationError
 from parent.main.models import User
 
@@ -25,6 +26,7 @@ class SignUpUserForm(FlaskForm):
 	last_name=StringField("Last Name *",validators=[DataRequired(),Length(min=8,max=25)])
 	password=PasswordField("Password *",validators=[DataRequired()])
 	net_password=PasswordField("Re-Type Password",validators=[DataRequired(),EqualTo('password')])
+	gender=SelectField('Gender *',choices=[('Male','Male'),('Female','Female')])
 	send_data=SubmitField('Send')
 
 	def validate_username(self):

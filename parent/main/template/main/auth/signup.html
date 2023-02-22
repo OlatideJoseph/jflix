@@ -2,16 +2,40 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">0
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Jflix | Sign-Up</title>
+	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.6.3.js')}}"></script>
 </head>
 <body>
-	{%from "utils.html" import nav, with context%}
+	{%from "utils.html" import nav with context%}
 	{{nav()}}
-    <form>
+    <form method='post' action="#">
     	{{form.csrf_token()}}
-    	{{form}}
+    	<div id="email-container">
+    		{{form.email.label}}
+	    	{{form.email()}}
+    	</div>
+    	<div id="first-section">
+    		{{form.name.label}}
+	    	{{form.name()}}
+    	</div>
+    	<div id="middle-section">
+    		{{form.middle_name.label}}
+	    	{{form.middle_name()}}
+    	</div>
+    	<div id="last-section">
+    		{{form.last_name.label}}
+	    	{{form.last_name()}}
+    	</div>
+    	
+    	{{form.gender.label}}
+    	{{form.gender()}}
     </form>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+
+    	});
+    </script>
 </body>
 </html>
