@@ -14,7 +14,7 @@
 
     <form method='post' action="#" autocomplete="off">
     	{{form.csrf_token()}}
-    	<div id="email-container">
+    	<div id="email-container" class="field-hidden">
     		{{form.email.label}}
 	    	{{form.email()}}
     	</div>
@@ -37,13 +37,18 @@
     	<button id="next-button">
     		Next
     	</button>
-    	{{form.send_data(style='display:none;')}}
+    	{{form.send_data(class="field")}}
+
     </form>
     <script type="text/javascript">
     	$(document).ready(function(){
+    		var hfield=$('.field-hidden');
     		var btn=$('#next-button');
     		btn.click(function(){
-    			open('http://www.google.com/robots.txt');
+    			hfield.fadeIn(1000);
+    			hfield.removeAttr('class');
+    			alert(hfield.nextSibling());
+    			var next=hfield.after.attr({'class':'field-hidden'});
     		});
     	});
     </script>
