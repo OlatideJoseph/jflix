@@ -4,7 +4,7 @@ a{
 	text-decoration: none;
 }
 button:disabled{
-	background: #fcba03 !important;
+	background: #3af27b !important;
 }
 body{
 	margin:0px;
@@ -82,7 +82,7 @@ p{
 	transition: .6s ease-in-out;
 }
 #nav-btn-signin:hover{
-	background: #fcba03;
+	background: #3af27b;
 	transition: .4s ease-in-out;
 }
 .jay-foot{

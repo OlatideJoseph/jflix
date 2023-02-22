@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/auth/auth.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Jflix | Sign-Up</title>
@@ -10,7 +11,8 @@
 <body>
 	{%from "utils.html" import nav with context%}
 	{{nav()}}
-    <form method='post' action="#">
+
+    <form method='post' action="#" autocomplete="off">
     	{{form.csrf_token()}}
     	<div id="email-container">
     		{{form.email.label}}
@@ -28,13 +30,21 @@
     		{{form.last_name.label}}
 	    	{{form.last_name()}}
     	</div>
-    	
-    	{{form.gender.label}}
-    	{{form.gender()}}
+    	<div class="gender-section">
+    		{{form.gender.label}}
+	    	{{form.gender()}}
+    	</div>
+    	<button id="next-button">
+    		Next
+    	</button>
+    	{{form.send_data(style='display:none;')}}
     </form>
     <script type="text/javascript">
     	$(document).ready(function(){
-
+    		var btn=$('#next-button');
+    		btn.click(function(){
+    			open('http://www.google.com/robots.txt');
+    		});
     	});
     </script>
 </body>

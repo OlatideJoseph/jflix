@@ -22,7 +22,7 @@
 	{{nav()}}
      <div class="login-controller">
      	{%if form.errors%}
-	     	<form method="post" action="#">
+	     	<form method="post" action="#" autocomplete="off">
 	     		<h2> Sign-In Jayflixer</h2>
 	     		{{form.csrf_token()}}
 	     		{% if form.username.errors%}

@@ -1,10 +1,26 @@
 body{
 	background: #202124;
+	font-family:  'Source code pro', monospace;
 }
 h2{
 	border-bottom: 2px solid orange;
-	font-family:  'Martian Mono', monospace;
 	position: relative;
+}
+select{
+	width: 90%;
+	background: transparent;
+	color:lightgrey;
+	padding: 10px;
+	outline: none;
+}
+option{
+	color:white;
+	padding: 10px;
+	background: black;
+	accent-color: black;
+	border:none;
+	margin:5px;
+	height: 40px;
 }
 form{
 
@@ -26,18 +42,17 @@ span{
 	padding-bottom: 5px;
     display:flex;
 }
-.login-text:focus{
-	border-bottom:5px solid green;
-}
 input[type='text'],input[type='password']{
 	display:block;
+	background-color: transparent;
 	width:90%;
 	outline:none;
-	border:none;
-	padding: 10px;
+	border: 2px solid lightgrey;
+	border-radius: 10px;
+	padding: 20px;
 }
 input[type='checkbox']{
-	accent-color:#202124;
+	accent-color:#3af27b;
 }
 label{
 	padding-top:20px;
