@@ -23,7 +23,9 @@ def load_user(user_id):
 
 class AnnonymousUser(db.Model,AnonymousUserMixin):
 	id=db.Column(db.Integer,primary_key=True)
-	pass
+	user_agent=db.Column(db.String)
+	ip_address=db.Column(db.Integer)
+	location=db.Column(db.String)
 
 
 
@@ -33,12 +35,14 @@ class User(db.Model,UserMixin):
 	__tablename__="user"
 	id=db.Column(db.Integer,primary_key=True)
 	first_name=db.Column(db.String(50),nullable=False)
-	maiden_name=db.Column(db.String(50),nullable=True)
+	middle_name=db.Column(db.String(50),nullable=True)
 	last_name=db.Column(db.String(50),nullable=False)
+	img_url=db.Column(db.String)
 	email=db.Column(db.String(150),nullable=False,unique=True)
 	username=db.Column(db.String(150),nullable=False,unique=True)
 	password=db.Column(db.Text,nullable=False)
 	dob=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+	gender=db.Column(db.String,default="Selected")
 	is_admin=db.Column(db.Boolean,default=True,nullable=False)
 	is_verified=db.Column(db.Boolean,default=False)
 	posts=db.relationship('Post',backref='writer',lazy=True)
@@ -139,10 +143,36 @@ Best regards,
 		return user
 
 
+
+	def tojson(self):
+		import json
+		json_user={
+			"id":self.id,
+			"username":self.username,
+			"password":self.password,
+			"first_name":self.first_name,
+			"last_name":self.last_name,
+			"middlename":self.maiden_name,
+			"is_verified":self.is_verified,
+			"is_admin":self.is_admin,
+			"gender":self.gender,
+			"date_of_birth":self.dob.strftime("%Y-%m-%d"),
+			"movies":{
+				"m":self.movie
+			},
+			"comments":{
+				"c":self.comments
+			}
+		}
+		tjson=json.dumps(json_user,ensure_ascii=True)
+		return tjson
+
+
 class Movie(db.Model):
 	__tablename__="movie"
 	id=db.Column(db.Integer,primary_key=True)
 	title=db.Column(db.String(150),nullable=False)
+	hashed_id=db.Column(db.String,unique=True)
 	detail=db.Column(db.Text,nullable=False)
 	category_type=db.Column(db.PickleType,default=['action&drama','sci-fi'])
 	category=db.Column(db.String,default="action",nullable=False)

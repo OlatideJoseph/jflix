@@ -15,10 +15,10 @@
 					   <li><a href="{{url_for('admin.home')}}">Admin</a></li>
 					{% endif %}
 					<li>
-						<a href="#">Home</a>
+						<a href="{{url_for('main.home',_external=True)}}">Home</a>
 					</li>
 		            <li>
-						<a href="#">Page</a>
+						<a href="{{url_for('main.movie')}}">Movie</a>
 					</li>
 		            <li>
 						<a href="#">Videos</a>

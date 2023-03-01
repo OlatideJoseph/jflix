@@ -11,7 +11,7 @@ body{
 	font-family: 'Source code pro',monospace;
 }
 #nav ul{
-	background: darkgrey;
+	background: #151521;
 	position:relative;
 	padding:10px ;
 	border-radius: 5px;
@@ -23,16 +23,37 @@ body{
 	padding:5px;
 	width: auto;
 }
-#nav a{
-	text-decoration: none;
-	color:lightgrey;
+#nav span{
+	margin-top:5px;
+	font-size:25px;
+	font-family: 'Martian Mono', monospace;
+	
+}
+#nav span a{
+	text-decoration:none;
+	color:#3af27b;
+	text-shadow: 3px 3px 2px #3af27b;
 }
 #nav a:visited{
     color: lightgrey;
 }
+#nav a{
+	text-decoration: none;
+    color:white;
+}
 #nav li:hover{
-	background: deepskyblue;
+	background: /*#1b1c15*/black;
 	border-radius:0 10px 10px 0;
 }
 
+#desc{
+	background: transparent;
+	padding: 10px;
+	outline: #151521;
+	font-family: 'Martian mono';
+	color: lightgrey;
+}
 
+.upload-input{
+	padding:15px;
+}

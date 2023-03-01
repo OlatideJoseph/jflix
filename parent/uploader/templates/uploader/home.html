@@ -9,7 +9,12 @@
 <body>
 	{% from "utils.html" import nav with context %}
 	{{nav()}}
-
-    <p>Producer home template</p>
+	<div class="upload-input">
+		<p>Producer home template</p>
+	    {{form.title()}}
+	    {{form.video()}}
+	    {{form.desc(placeholder="Enter a movie description",width='100',height='500')}}
+	    {{form.submit()}}
+	</div>
 </body>
 </html>

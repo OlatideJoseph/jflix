@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_login import LoginManager
+from flask_login import LoginManager,current_user
 from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
@@ -36,6 +36,10 @@ def create_app():
 	#Application context processor
 	from parent.main.models import User,Post,Comment
 	from parent.admin.models import Admin
+	#context part
+	@app.context_processor
+	def req_cont():
+		return dict(user=current_user)
 	@app.shell_context_processor
 	def load_context():
 		return {'mail':mail,'User':User,'Post':Post,'Comment':Comment,'Admin':Admin}

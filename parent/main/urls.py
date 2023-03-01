@@ -1,20 +1,42 @@
 from flask import render_template,url_for,redirect,request,flash,session
 from flask_login import current_user,login_user,logout_user,login_required
+from parent.utils import log_out_required
 from parent.main import main
 from parent.main.forms import LoginForm,SignUpUserForm
 from parent.admin.models import Admin
 from parent.main.models import User,Movie,Comment
 
 
+@main.route("/favicon.ico")
+def favicon():
+	return redirect(url_for('static',filename='icons8-favicon.png'))
+
 @main.route("/")
 def index():
+	print(request.application)
 	return render_template("main/index.html")
 
+
+
+@main.route("/home")
+@login_required
+def home():
+	movies=Movie.query.all()
+	return render_template("main/home.html",movie=movies)
+
+@main.route("/movie/detail/<string:hashid>")
+@login_required
+def movie_detail(hashid):
+	movie=Movie.query.filter_by(hashed_id=hashid).first()
+	return render_template("main/movie_detail.html",movie=movie)
+
+
+@main.route("/movies")
+def movie():
+	return 
 @main.route("/signin",methods=['GET','POST'])
-@main.route('/login',methods=['GET',"POST"])
 def login():
 	if current_user.is_authenticated:
-		print(session.keys())
 		return redirect(url_for("main.index"))
 	form=LoginForm()
 	nextu=request.args.get('next',"/")
@@ -31,13 +53,12 @@ def login():
 		return dict(resp="data invalid")
 	return render_template("main/auth/signin.html",form=form)
 
-@main.route("/home")
-@login_required
-def home():
-	return "<h1>Jflix home for videos in the land of myth and the time of magic the destiny of a great</h1>"
+@main.get("/logged-out")
+@log_out_required
+def logout():
+	return "You have been logged out"
 
 @main.route('/sign-out')
-@main.route('/logout')
 def log_out_user():
 	logout_user()
 	return redirect(url_for('main.logout'))
@@ -51,9 +72,7 @@ def addc():
 	if form.validate_on_submit():
 		pass
 	return render_template("main/auth/signup.html",form=form)
-@main.route("/favicon.ico")
-def favicon():
-	return redirect(url_for('static',filename='icons8-favicon.png'))
+
 
 
 @main.app_errorhandler(404)

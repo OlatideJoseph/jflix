@@ -51,12 +51,12 @@ p img:hover{
 	
 }
 #nav span a{
-	text-decoration:blink;
+	text-decoration:none;
 	color:#3af27b;
 	text-shadow: 3px 3px 2px #3af27b;
 }
 #nav{
-	background:#1b1c15;/*:whitesmoke*/
+	background:black;/*#1b1c15;:whitesmoke*/
 	padding:10px;
 }
 #intro-text{

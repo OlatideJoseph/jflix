@@ -2,9 +2,11 @@ from werkzeug.security import generate_password_hash as gph
 from parent import db
 from parent.main.models import User
 
+class AdminMixin:
+	level=db.Column(db.Integer,nullable=False,default=3)
 
 
-class Admin(User):
+class Admin(User,AdminMixin):
 	def __init__(self,*args,**kwargs):
 		super(Admin,self).__init__(**kwargs)
 		self.is_admin=True

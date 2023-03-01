@@ -31,7 +31,7 @@
 	    	{{form.last_name()}}
     	</div>
     	<div class="gender-section">
-    		{{form.gender.label}}
+    		{{form.gender.label}}</br>
 	    	{{form.gender()}}
     	</div>
     	<button id="next-button">
@@ -41,14 +41,11 @@
 
     </form>
     <script type="text/javascript">
+    	var hfield=$('.field-hidden');
     	$(document).ready(function(){
-    		var hfield=$('.field-hidden');
     		var btn=$('#next-button');
     		btn.click(function(){
     			hfield.fadeIn(1000);
-    			hfield.removeAttr('class');
-    			alert(hfield.nextSibling());
-    			var next=hfield.after.attr({'class':'field-hidden'});
     		});
     	});
     </script>
