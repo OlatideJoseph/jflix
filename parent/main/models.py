@@ -42,7 +42,7 @@ class User(db.Model,UserMixin):
 	username=db.Column(db.String(150),nullable=False,unique=True)
 	password=db.Column(db.Text,nullable=False)
 	dob=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-	gender=db.Column(db.String,default="Selected")
+	gender=db.Column(db.String,default="Select",nullable=False)
 	is_admin=db.Column(db.Boolean,default=True,nullable=False)
 	is_verified=db.Column(db.Boolean,default=False)
 	posts=db.relationship('Post',backref='writer',lazy=True)
