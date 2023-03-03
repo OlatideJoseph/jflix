@@ -1,0 +1,75 @@
+body{
+	background: #202124;
+	font-family:  'Source code pro', monospace;
+}
+h2{
+	border-bottom: 2px solid orange;
+	position: relative;
+}
+select{
+	width: 90%;
+	background: transparent;
+	color:lightgrey;
+	padding: 10px;
+	outline: none;
+}
+option{
+	color:white;
+	padding: 10px;
+	background: black;
+	accent-color: black;
+	border:none;
+	margin:5px;
+	height: 40px;
+}
+.gender-section{
+	margin-top: 10px;
+}
+.field-hidden{
+
+	display: none;
+}
+form{
+
+}
+input{
+	margin-top: 10px;
+
+}
+span{
+	margin-top: 10px ;
+	margin-bottom: 10px;
+}
+.login-controller{
+	background: #00000;
+	position: relative;
+	margin-top: 10%;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 5px;
+    display:flex;
+}
+input[type='text'],input[type='password']{
+	display:block;
+	background-color: transparent;
+	width:50%;
+	outline:none;
+	color: white;
+	border: 2px solid lightgrey;
+	border-radius: 10px;
+	padding: 20px;
+}
+input[type='checkbox']{
+	accent-color:#3af27b;
+}
+label{
+	padding-top:20px;
+	font-size:1.1em;
+}
+#remember input{
+    background-color: #fff;
+}
+input[type='submit']{
+	padding:15px;
+	border-radius:10px;
+}

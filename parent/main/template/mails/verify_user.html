@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{current_user.username}} Activated</title>
+</head>
+<body>
+	<p>
+		Dear {{current_user.first_name}},
+
+	    We are delighted to inform you that your account has been successfully created. <wbr>
+		You can now log in using this link<a href="{{url_for('login',_external=True)}}"> Jflix Login</a> and start using our services.
+
+		If you have any questions or concerns, please feel free to reach out to us.
+
+		Best regards,
+		Jflix Entertainment inc.
+	</p>
+
+</body>
+</html>
