@@ -2,10 +2,15 @@ from flask import render_template,url_for,redirect,request,flash,session
 from flask_login import current_user,login_user,logout_user,login_required
 from parent.utils import log_out_required
 from parent.main import main
+from parent.main.views import UserProfileView
 from parent.main.forms import LoginForm,SignUpUserForm
 from parent.admin.models import Admin
 from parent.main.models import User,Movie,Comment
 
+main.add_url_rule(
+	'/user/profile',
+	view_func=UserProfileView.as_view('profile-user')
+	)
 
 @main.route("/favicon.ico")
 def favicon():

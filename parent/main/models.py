@@ -37,6 +37,7 @@ class User(db.Model,UserMixin):
 	first_name=db.Column(db.String(50),nullable=False)
 	middle_name=db.Column(db.String(50),nullable=True)
 	last_name=db.Column(db.String(50),nullable=False)
+	image_name=db.Column(db.String)
 	img_url=db.Column(db.String)
 	email=db.Column(db.String(150),nullable=False,unique=True)
 	username=db.Column(db.String(150),nullable=False,unique=True)

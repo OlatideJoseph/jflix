@@ -1,9 +1,42 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField
+from flask_wtf.file import FileField,FileAllowed,FileRequired
 from wtforms import (StringField,BooleanField,SubmitField,PasswordField,
-					BooleanField,TextAreaField,SelectField,RadioField)
+					BooleanField,TextAreaField,SelectField,RadioField,DateField)
 from wtforms.validators import DataRequired,Length,EqualTo,Email,Regexp,ValidationError
 from parent.main.models import User
+
+match=r'[^*&_\-@=+^$",.<>!/\\]+[A-Za-z]+$'
+username_match=r'''^[A-Za-z0-9_]+$'''
+
+class UserUpdateForm(FlaskForm):
+	profile_image=FileField("UpdateProfile",
+		validators=[
+			FileAllowed(
+				('jpg','jpeg','png'),
+			)
+		]
+	)
+	first_name=StringField("FirstName: ",
+		validators=[DataRequired(),
+		Length(max=15),
+		Regexp(match)
+		]
+		)
+	middle_name=StringField('MiddleName:',
+		validators=[DataRequired(),
+		Length(max=15),
+		Regexp(match)
+		]
+		)
+	last_name=StringField("LastName: ",
+		validators=[DataRequired(),
+		Length(max=15),
+		Regexp(match)
+		]
+		)
+	user_name=StringField('Username:',validators=[Length(max=25),Regexp(username_match)])
+	d_o_b=DateField('DateTime:')
+	modify=SubmitField('Modify')
 
 class LoginForm(FlaskForm):
 	username=StringField("Username :*",validators=[DataRequired(),
