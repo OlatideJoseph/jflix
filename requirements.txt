@@ -2,6 +2,7 @@ alembic==1.9.0
 anyio==3.6.2
 argon2-cffi==21.3.0
 argon2-cffi-bindings==21.2.0
+gunicorn
 arrow==1.2.3
 asgiref==3.6.0
 asttokens==2.2.1
