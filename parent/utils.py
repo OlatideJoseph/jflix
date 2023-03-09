@@ -93,8 +93,11 @@ class ProfileView(View):
 				current_user.username=user_name
 			if file:	
 				filename=file.filename
-				filename=secure_filename(filename)			
+				filename=secure_filename(filename)
 				if filename is not None:
+					#changing file extension to webp
+					name,_=filename.split('.')
+					filename=name+'.webp'
 					image_name=current_user.image_name
 					current_user.img_url=url_for('static',filename='/users/images/'+filename)
 					# checks if the former image exists in the images directory and deletes it
@@ -109,7 +112,7 @@ class ProfileView(View):
 					img=Image.open(file)
 					img.thumbnail((250,250))
 					construct=os.path.join(request.root_path,'parent/static/users/images',filename)
-					img.save(construct)
+					img.save(construct,format="webp")
 			db.session.commit()
 		return render_template(template,form=form)
 

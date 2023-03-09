@@ -8,6 +8,7 @@ class Post(db.Model):
 	title=db.Column(db.String(150),nullable=False)
 	text=db.Column(db.Text,nullable=False,unique=True)
 	date_written=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+	editable=db.Column(db.Boolean,nullable=False,default=True)
 	category=db.Column(db.PickleType,nullable=True)
 	images=db.Column(db.PickleType,nullable=True)
 	user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
@@ -22,5 +23,10 @@ class Post(db.Model):
 		    'writer':self.writer.username
 		}
 		return json.dumps(dicti)
+
+	def __str__(self):
+		return f"""User<{self.writer.username}>.Post<{self.title[15]}"""
+	def __repr__(self):
+		return f"""User<{self.writer.username}>.Post<{self.title[15]}"""
 
 from parent.main.models import User

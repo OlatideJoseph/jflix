@@ -18,7 +18,6 @@ def favicon():
 
 @main.route("/")
 def index():
-	print(request.application)
 	return render_template("main/index.html")
 
 
@@ -38,7 +37,7 @@ def movie_detail(hashid):
 
 @main.route("/movies")
 def movie():
-	return 
+	return "<h1>Movies Pages</h1>"
 @main.route("/signin",methods=['GET','POST'])
 def login():
 	if current_user.is_authenticated:
@@ -54,7 +53,7 @@ def login():
 			if uobj.check_password(password):
 				login_user(uobj,remember=remember)
 				return redirect('/') if not nextu else redirect(nextu)
-			flash('Invalid username or password')
+			flash('Invalid username or password',"error")
 		return dict(resp="data invalid")
 	return render_template("main/auth/signin.html",form=form)
 
@@ -83,3 +82,9 @@ def addc():
 @main.app_errorhandler(404)
 def notfound(e):
 	return {'message':str(e.get_body),"code":str(e.response)},404
+
+@main.app_errorhandler(500)
+def internal_server_error(e):
+	return jsonify(
+		{'message':'An error has occured within the server',
+		"code":str(500)},500)
