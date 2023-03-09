@@ -40,7 +40,7 @@ class UserUpdateForm(FlaskForm):
 
 class LoginForm(FlaskForm):
 	username=StringField("Username :*",validators=[DataRequired(),
-		Length(min=3,max=25),Regexp("^[a-z0-9_]+$",message="Your username must be alphanumeric")])
+		Length(min=3,max=25),Regexp("^[a-zA-Z0-9_]+$",message="Your username must be alphanumeric")])
 	password=PasswordField(None,validators=[DataRequired(),Length(min=8,max=16)])
 	remember=BooleanField("Remember me")
 	submit=SubmitField("Sign-In")
@@ -55,6 +55,7 @@ class MovieForm(FlaskForm):
 class SignUpUserForm(FlaskForm):
 	name=StringField("First Name",validators=[DataRequired(),Length(min=8,max=25)])
 	email=StringField("Email",validators=[DataRequired(),Email(),Length(max=120)])
+	username=StringField("Username :",validators=[DataRequired(),Length(min=3,max=16)])
 	middle_name=StringField("Middle Name",validators=[DataRequired(),Length(min=8,max=25)])
 	last_name=StringField("Last Name *",validators=[DataRequired(),Length(min=8,max=25)])
 	password=PasswordField("Password *",validators=[DataRequired()])

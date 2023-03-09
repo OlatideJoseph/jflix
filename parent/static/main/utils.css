@@ -1,0 +1,36 @@
+
+.message{
+	padding-left: 10px;
+	margin-left: 5px;
+	transition: .5s ease-in-out;
+}
+.alert-error{
+    width:95%;
+    color: lightgrey;
+    background-color: red;
+    border: 1.5px solid red;
+    padding: 5px;
+    font-size: 15px;
+    transition: .5s ease-in-out;
+}
+.alert-info{
+	width:95%;
+    color: lightgrey;
+    background-color: #1010e13d;
+    border: 1.5px solid darkblue;
+    border-radius: 5px;
+    padding: 5px;
+    transition: .5s ease-in-out;
+    font-size: 15px;
+}
+#close{
+	display: inline;
+	float: right;
+	font-size: 20px;
+	margin-left: 5px;
+	transition: .5s ease-in-out;
+	cursor: pointer;
+}
+#close:hover{
+	color: red;
+}

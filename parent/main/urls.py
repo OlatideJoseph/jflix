@@ -52,6 +52,7 @@ def login():
 		if uobj:
 			if uobj.check_password(password):
 				login_user(uobj,remember=remember)
+				flash("You've been logged in successfully !",'info')
 				return redirect('/') if not nextu else redirect(nextu)
 			flash('Invalid username or password',"error")
 		return dict(resp="data invalid")
@@ -74,7 +75,25 @@ def addc():
 		return redirect(url_for('main.index'))
 	form=SignUpUserForm()
 	if form.validate_on_submit():
-		pass
+		if request.headers.setdefault('content-type',
+			'application/html') == 'application/json':
+		    data=request.get_json()
+		else:
+			fn=form.name.data
+			ln=form.last_name.data
+			em=form.email.data
+			un=form.username.data
+			pd=User.generate_password(form.password.data)
+			gd=form.gender.data
+			user=User(
+				first_name=fn,
+				last_name=ln,
+				email=em,username=un,gender=gd,
+				password=pd
+
+				)
+			db.session.add(user)
+			db.session.commit()
 	return render_template("main/auth/signup.html",form=form)
 
 

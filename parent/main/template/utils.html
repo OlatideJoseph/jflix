@@ -51,13 +51,18 @@
 		</div>
 	{% endmacro%}
 	{% macro flash_div()%}
-		<div class="message">
-			{%with msg =get_flashed_messages(with_category=True)%}
-			     {% for category,message in msg%}
-				        <p class="alert-{{category}}">{{message}}</p>
-			     {% endfor %}
+			{%with msg =get_flashed_messages(with_categories=True)%}
+			    <div class="message">
+				    {% if msg%}
+					    {% for category,message in msg%}
+					        <p class="alert-{{category}}">
+					        	{{message}}
+					        	<small id="close">&times</small>
+					        </p>
+					    {% endfor %}
+				{% endif %}
+				</div>
 			{% endwith %}
-		</div>
 	{% endmacro %}
 	{% macro footer()%}
 		<footer class='jay-foot'>

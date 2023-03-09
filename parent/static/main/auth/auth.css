@@ -29,8 +29,12 @@ option{
 
 	display: none;
 }
-form{
-
+.form-setter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
 }
 input{
 	margin-top: 10px;

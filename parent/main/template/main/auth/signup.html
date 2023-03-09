@@ -11,43 +11,49 @@
 <body>
 	{%from "utils.html" import nav with context%}
 	{{nav()}}
-
-    <form method='post' action="#" autocomplete="off">
-    	{{form.csrf_token()}}
-    	<div id="email-container" class="field-hidden">
-    		{{form.email.label}}
-	    	{{form.email()}}
-    	</div>
-    	<div id="first-section">
-    		{{form.name.label}}
-	    	{{form.name()}}
-    	</div>
-    	<div id="middle-section">
-    		{{form.middle_name.label}}
-	    	{{form.middle_name()}}
-    	</div>
-    	<div id="last-section">
-    		{{form.last_name.label}}
-	    	{{form.last_name()}}
-    	</div>
-    	<div class="gender-section">
-    		{{form.gender.label}}</br>
-	    	{{form.gender()}}
-    	</div>
-    	<button id="next-button">
-    		Next
-    	</button>
-    	{{form.send_data(class="field")}}
-
-    </form>
-    <script type="text/javascript">
-    	var hfield=$('.field-hidden');
-    	$(document).ready(function(){
-    		var btn=$('#next-button');
-    		btn.click(function(){
-    			hfield.fadeIn(1000);
-    		});
-    	});
-    </script>
+	<div class="form-setter">
+		    <form method='post' action="#" autocomplete="off">
+		    	{{form.csrf_token()}}
+		    	<div id="email-container" class="field-hidden">
+		    		{{form.email.label}}
+			    	{{form.email()}}
+		    	</div>
+		    	<div class="user-container">
+		    		{{form.username.label}}
+		    		{{form.username()}}
+		    		
+		    	</div>
+		    	<div id="first-section">
+		    		{{form.name.label}}
+			    	{{form.name()}}
+		    	</div>
+		    	<div id="middle-section">
+		    		{{form.middle_name.label}}
+			    	{{form.middle_name()}}
+		    	</div>
+		    	<div id="last-section">
+		    		{{form.last_name.label}}
+			    	{{form.last_name()}}
+		    	</div>
+		    	<div class="gender-section">
+		    		{{form.gender.label}}</br>
+			    	{{form.gender()}}
+		    	</div>
+		    	<div class="password-section">
+		    		{{form.password.label}}
+		    		{{form.password()}}
+		    		
+		    	</div>
+		    	<div class="net_password-section">
+		    		{{form.net_password.label}}
+		    		{{form.net_password()}}
+		    		
+		    	</div>
+		    	<button id="next-button">
+		    		Next
+		    	</button>
+		    	{{form.send_data(class="field")}}
+		    </form>
+	</div>
 </body>
 </html>
