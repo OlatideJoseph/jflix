@@ -5,7 +5,7 @@ from parent.main import main
 from parent.main.views import UserProfileView
 from parent.main.forms import LoginForm,SignUpUserForm
 from parent.admin.models import Admin
-from parent.main.models import User,Movie,Comment
+from parent.main.models import User,Movie,Comment,db
 
 main.add_url_rule(
 	'/user/profile',
@@ -69,13 +69,14 @@ def log_out_user():
 	return redirect(url_for('main.logout'))
 
 
-@main.route("/sign-up")
+@main.route("/sign-up",methods=['GET','POST'])
 def addc():
 	if current_user.is_authenticated:
 		return redirect(url_for('main.index'))
 	form=SignUpUserForm()
 	if form.validate_on_submit():
-		if request.headers.setdefault('content-type',
+		print(request.headers)
+		if request.headers.get('content-type',
 			'application/html') == 'application/json':
 		    data=request.get_json()
 		else:
@@ -94,6 +95,7 @@ def addc():
 				)
 			db.session.add(user)
 			db.session.commit()
+			return redirect(url_for('main.login'))
 	return render_template("main/auth/signup.html",form=form)
 
 

@@ -30,15 +30,14 @@ option{
 	display: none;
 }
 .form-setter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: scroll;
+    max-width: 480px;
+    max-height: 480px;
+    margin: 50px 100px;
 }
 input{
 	margin-top: 10px;
-
+	width: 100%;
+	position: relative;
 }
 span{
 	margin-top: 10px ;
@@ -56,12 +55,12 @@ span{
 input[type='text'],input[type='password']{
 	display:block;
 	background-color: transparent;
-	width:50%;
+	width:85%;
 	outline:none;
 	color: white;
 	border: 2px solid lightgrey;
 	border-radius: 10px;
-	padding: 20px;
+	padding: 15px;
 }
 input[type='checkbox']{
 	accent-color:#3af27b;
@@ -73,7 +72,11 @@ label{
 #remember input{
     background-color: #fff;
 }
-input[type='submit']{
+.field{
 	padding:15px;
+	border: none;
+	background-image: linear-gradient(to right, #3af27b);
+	color: lightgrey;
 	border-radius:10px;
+	width: 100px;
 }
