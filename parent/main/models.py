@@ -44,8 +44,9 @@ class User(db.Model,UserMixin):
 	password=db.Column(db.Text,nullable=False)
 	dob=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 	gender=db.Column(db.String,default="Select",nullable=False)
-	is_admin=db.Column(db.Boolean,default=True,nullable=False)
+	is_admin=db.Column(db.Boolean,default=False,nullable=False)
 	is_verified=db.Column(db.Boolean,default=False)
+	is_suspended=db.Column(db.Boolean,default=False)
 	posts=db.relationship('Post',backref='writer',lazy=True)
 	movie=db.relationship('Movie',backref='producer',lazy=True)
 	movie_like=db.relationship('MovieLike',backref='liker',lazy=True)
@@ -60,6 +61,11 @@ class User(db.Model,UserMixin):
 	def check_password(self,p):
 		password=cph(self.password,p)
 		return password
+
+	def suspend(self):
+		self.is_suspended=True
+		db.session.add(self)
+		db.session.commit()
 
 
 	def send_mail(self,email=None,html=None,title=None,body=None):
@@ -159,10 +165,10 @@ Best regards,
 			"gender":self.gender,
 			"date_of_birth":self.dob.strftime("%Y-%m-%d"),
 			"movies":{
-				"m":self.movie
+				"m":len(self.movie)
 			},
 			"comments":{
-				"c":self.comments
+				"c":len(self.comments)
 			}
 		}
 		tjson=json.dumps(json_user,ensure_ascii=True)

@@ -6,6 +6,7 @@
 	<title>Jflix | Login</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/auth/auth.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/utils.css')}}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7ME25FB1T"></script>
@@ -18,8 +19,9 @@
 	</script>
 </head>
 <body>
-	{% from "utils.html" import nav with context%}
+	{% from "utils.html" import nav,flash_div with context%}
 	{{nav()}}
+	{{flash_div()}}
      <div class="login-controller">
      	{%if form.errors%}
 	     	<form method="post" action="#" autocomplete="off">

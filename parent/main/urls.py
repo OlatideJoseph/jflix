@@ -1,6 +1,6 @@
 from flask import render_template,url_for,redirect,request,flash,session
 from flask_login import current_user,login_user,logout_user,login_required
-from parent.utils import log_out_required
+from parent.utils import log_out_required,url_normal_checks
 from parent.main import main
 from parent.main.views import UserProfileView
 from parent.main.forms import LoginForm,SignUpUserForm
@@ -24,18 +24,22 @@ def index():
 
 @main.route("/home")
 @login_required
+@url_normal_checks
 def home():
 	movies=Movie.query.all()
 	return render_template("main/home.html",movie=movies)
 
 @main.route("/movie/detail/<string:hashid>")
 @login_required
+@url_normal_checks
 def movie_detail(hashid):
 	movie=Movie.query.filter_by(hashed_id=hashid).first()
 	return render_template("main/movie_detail.html",movie=movie)
 
 
 @main.route("/movies")
+@login_required
+@url_normal_checks
 def movie():
 	return "<h1>Movies Pages</h1>"
 @main.route("/signin",methods=['GET','POST'])
@@ -74,31 +78,34 @@ def addc():
 	if current_user.is_authenticated:
 		return redirect(url_for('main.index'))
 	form=SignUpUserForm()
+	if request.headers.get("content-type","application/html") == "application/json":
+		rargs=request.args
+		return redirect(url_for('ajax.home'),**rargs)
 	if form.validate_on_submit():
-		print(request.headers)
-		if request.headers.get('content-type',
-			'application/html') == 'application/json':
-		    data=request.get_json()
-		else:
-			fn=form.name.data
-			ln=form.last_name.data
-			em=form.email.data
-			un=form.username.data
-			pd=User.generate_password(form.password.data)
-			gd=form.gender.data
-			user=User(
-				first_name=fn,
-				last_name=ln,
-				email=em,username=un,gender=gd,
-				password=pd
+		fn=form.name.data
+		ln=form.last_name.data
+		em=form.email.data
+		un=form.username.data
+		pd=User.generate_password(form.password.data)
+		gd=form.gender.data
+		user=User(
+			first_name=fn,
+			last_name=ln,
+			email=em,username=un,gender=gd,
+			password=pd
 
-				)
-			db.session.add(user)
-			db.session.commit()
-			return redirect(url_for('main.login'))
+			)
+		db.session.add(user)
+		db.session.commit()
+		return redirect(url_for('main.login'))
 	return render_template("main/auth/signup.html",form=form)
 
-
+@main.route("/user/verification")
+def user_verification():
+	return
+@main.route("/user/not/verified")
+def not_verified():
+	return render_template("main/users/not_verified.html")
 
 @main.app_errorhandler(404)
 def notfound(e):

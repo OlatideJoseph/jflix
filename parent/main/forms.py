@@ -66,8 +66,8 @@ class SignUpUserForm(FlaskForm):
 	def validate_username(self,username=username):
 		user=User.query.filter_by(username=username.data).first()
 		if user:
-			raise ValidationError("Sorry a user with that email already exists")
+			raise ValidationError("Sorry a user with that username already exists")
 	def validate_email(self,email=email):
-		user=User.query.filter_by(email=email.data)
+		user=User.query.filter_by(email=email.data).first()
 		if user:
-			raise ValidationError("Email is already associated with an account pls continue to login")
+			raise ValidationError("Email is already associated with another account please use another one !")

@@ -1,8 +1,11 @@
 
 .message{
 	padding-left: 10px;
-	margin-left: 5px;
+	margin-left: 10px;
 	transition: .5s ease-in-out;
+}
+.form-error{
+	border: 1.5px solid red !important;
 }
 .alert-error{
     width:95%;
@@ -16,12 +19,17 @@
 .alert-info{
 	width:95%;
     color: lightgrey;
-    background-color: #1010e13d;
-    border: 1.5px solid darkblue;
+    background-color: #808080c7;
+    background-image: linear-gradient(to right,#808080c7);
+    border: 1.5px solid #04fbabb0;
     border-radius: 5px;
     padding: 5px;
     transition: .5s ease-in-out;
     font-size: 15px;
+}
+.text-error{
+	color: red;
+	margin: 10px;
 }
 #close{
 	display: inline;

@@ -8,6 +8,17 @@ from .main.models import User,db
 import secrets
 import os
 
+def url_normal_checks(func_view):
+	@functools.wraps(func_view)
+	def wrap(*args,**kwargs):
+	    if current_user.is_verified:
+	    	if not current_user.is_suspended:
+	    		pass
+	    else:
+	    	return redirect(url_for('not_verified'))
+	    return func_view(*args,**kwargs)
+	return wrap
+
 def log_out_required(func):
 	'''A wrapper function that that act as the opposite of the flask login required'''
 	@functools.wraps(func)

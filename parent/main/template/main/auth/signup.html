@@ -4,49 +4,108 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/auth/auth.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/utils.css')}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Jflix | Sign-Up</title>
 	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.6.3.js')}}"></script>
 </head>
 <body>
-	{%from "utils.html" import nav with context%}
+	{%from "utils.html" import nav,flash_div with context%}
 	{{nav()}}
+	{{flash_div()}}
 	<div class="form-setter">
 		    <form method='post' action="#" autocomplete="off">
 		    	{{form.csrf_token()}}
 		    	<div id="email-container">
+
 		    		{{form.email.label}}
-			    	{{form.email()}}
+		    		{% if form.email.errors%}
+				    	{{form.email(class='form-error')}}
+				    	{% for error in form.email.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.email()}}
+				    {% endif %}
 		    	</div>
 		    	<div class="user-container">
 		    		{{form.username.label}}
-		    		{{form.username()}}
+		    		{% if form.username.errors%}
+				    	{{form.username(class='form-error')}}
+				    	{% for error in form.username.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.username()}}
+				    {% endif %}
 		    		
 		    	</div>
 		    	<div id="first-section">
 		    		{{form.name.label}}
-			    	{{form.name()}}
+			    	{% if form.name.errors%}
+				    	{{form.name(class='form-error')}}
+				    	{% for error in form.name.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.name()}}
+				    {% endif %}
 		    	</div>
 		    	<div id="middle-section">
 		    		{{form.middle_name.label}}
-			    	{{form.middle_name()}}
+			    	{% if form.middle_name.errors%}
+				    	{{form.middle_name(class='form-error')}}
+				    	{% for error in form.middle_name.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.middle_name()}}
+				    {% endif %}
 		    	</div>
 		    	<div id="last-section">
 		    		{{form.last_name.label}}
-			    	{{form.last_name()}}
+			    	{% if form.last_name.errors%}
+				    	{{form.last_name(class='form-error')}}
+				    	{% for error in form.last_name.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.last_name()}}
+				    {% endif %}
 		    	</div>
 		    	<div class="gender-section">
 		    		{{form.gender.label}}</br>
-			    	{{form.gender()}}
+			    	{% if form.gender.errors%}
+				    	{{form.gender(class='form-error')}}
+				    	{% for error in form.gender.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.gender()}}
+				    {% endif %}
 		    	</div>
 		    	<div class="password-section">
 		    		{{form.password.label}}
-		    		{{form.password()}}
+		    		{% if form.password.errors%}
+				    	{{form.password(class='form-error')}}
+				    	{% for error in form.password.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.password()}}
+				    {% endif %}
 		    		
 		    	</div>
 		    	<div class="net_password-section">
 		    		{{form.net_password.label}}
-		    		{{form.net_password()}}
+		    		{% if form.net_password.errors%}
+				    	{{form.net_password(class='form-error')}}
+				    	{% for error in form.net_password.errors%}
+				    	    <small class="text-error">{{ error }}</small>
+				    	{% endfor %}
+				    {% else%}
+					    {{form.net_password()}}
+				    {% endif %}
 		    		
 		    	</div>
 		    	<button id="next-button">

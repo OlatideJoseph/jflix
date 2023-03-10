@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask_migrate import Migrate
 
-
 db=SQLAlchemy()
 moment=Moment()
 mail=Mail()
@@ -33,6 +32,8 @@ def create_app():
 	app.register_blueprint(posts,url_prefix='/post')
 	from parent.uploader.urls import uploader
 	app.register_blueprint(uploader,url_prefix='/uploader')
+	from parent.ajax.urls import ajax
+	app.register_blueprint(ajax,url_prefix="/browser/ajax/1.0")
 	#Application context processor
 	from parent.main.models import User,Post,Comment
 	from parent.admin.models import Admin
