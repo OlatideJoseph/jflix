@@ -28,7 +28,7 @@
 					    {{form.email()}}
 				    {% endif %}
 		    	</div>
-		    	<div class="user-container">
+		    	<div class="user-container field-hidden">
 		    		{{form.username.label}}
 		    		{% if form.username.errors%}
 				    	{{form.username(class='form-error')}}
@@ -40,7 +40,7 @@
 				    {% endif %}
 		    		
 		    	</div>
-		    	<div id="first-section">
+		    	<div id="first-section" class="field-hidden">
 		    		{{form.name.label}}
 			    	{% if form.name.errors%}
 				    	{{form.name(class='form-error')}}
@@ -51,7 +51,7 @@
 					    {{form.name()}}
 				    {% endif %}
 		    	</div>
-		    	<div id="middle-section">
+		    	<div id="middle-section" class="field-hidden">
 		    		{{form.middle_name.label}}
 			    	{% if form.middle_name.errors%}
 				    	{{form.middle_name(class='form-error')}}
@@ -62,7 +62,7 @@
 					    {{form.middle_name()}}
 				    {% endif %}
 		    	</div>
-		    	<div id="last-section">
+		    	<div id="last-section" class="field-hidden">
 		    		{{form.last_name.label}}
 			    	{% if form.last_name.errors%}
 				    	{{form.last_name(class='form-error')}}
@@ -73,7 +73,7 @@
 					    {{form.last_name()}}
 				    {% endif %}
 		    	</div>
-		    	<div class="gender-section">
+		    	<div class="gender-section field-hidden">
 		    		{{form.gender.label}}</br>
 			    	{% if form.gender.errors%}
 				    	{{form.gender(class='form-error')}}
@@ -84,7 +84,7 @@
 					    {{form.gender()}}
 				    {% endif %}
 		    	</div>
-		    	<div class="password-section">
+		    	<div class="password-section field-hidden">
 		    		{{form.password.label}}
 		    		{% if form.password.errors%}
 				    	{{form.password(class='form-error')}}
@@ -96,7 +96,7 @@
 				    {% endif %}
 		    		
 		    	</div>
-		    	<div class="net_password-section">
+		    	<div class="net_password-section field-hidden">
 		    		{{form.net_password.label}}
 		    		{% if form.net_password.errors%}
 				    	{{form.net_password(class='form-error')}}
@@ -108,11 +108,35 @@
 				    {% endif %}
 		    		
 		    	</div>
-		    	<button id="next-button">
+		    	<button id="next-button" type="button">
 		    		Next
 		    	</button>
 		    	{{form.send_data(class="field")}}
 		    </form>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			function validate_input(field){
+				if (field.attr('type') == 'email'){
+					if (field.val()){
+						var email=field.val();
+					}
+				}else{
+					return null;
+				};
+			}
+			var btn = $('.field').hide();
+			var obj=$('#email-container').children();
+			$('#next-button').click(function(){
+				if (validate_input(obj.children('input')) == null){
+					var next=obj.parent().next();
+					next.toggleClass('field-hidden');
+					alert(next.html());
+					obj.parent().hide();
+					obj=obj.parent().next().children('input');
+				}
+			});
+		});
+	</script>
 </body>
 </html>
