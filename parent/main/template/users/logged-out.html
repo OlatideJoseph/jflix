@@ -1,0 +1,7 @@
+{% extends 'users/base.html'%}
+{% block head%}
+    <title> {{username}} logged out!</title>
+{% endblock%}
+{% block body%}
+    {{username}} Logged out,click this link to login <a href="{{url_for('main.login',_external=True)}}">Click Me</a>
+{% endblock%}

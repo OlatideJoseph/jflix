@@ -65,13 +65,17 @@ def login():
 @main.get("/logged-out")
 @log_out_required
 def logout():
-	return "You have been logged out"
+	username=request.args.get('username')
+	return render_template('users/logged-out.html',username=username)
 
 @main.route('/sign-out')
 def log_out_user():
+	username=''
+	if current_user.is_authenticated:
+		username=current_user.username
 	logout_user()
-	return redirect(url_for('main.logout'))
-
+	return redirect(url_for('main.logout')) if not username else \
+	    redirect(url_for('main.logout',username=username))
 
 @main.route("/sign-up",methods=['GET','POST'])
 def addc():

@@ -189,8 +189,17 @@ class Movie(db.Model):
 	comments=db.relationship("Comment",backref="movies",lazy=True)
 
 
-	def tojson(self):
-		movie_dict={"id":self.id,}
+	def tojson(self) -> dict:
+		movie_dict={
+		"id":self.id,
+		"title":self.title,
+		"hashed_id":self.hashed_id,
+		"detail":self.detail,
+		"category_type":self.category_type
+		}
+		movie_dict=json.dumps(movie_dict,ensure_ascii=True,indent=4)
+
+		return movie_dict
 
 class Comment(db.Model):
     __tablename__="comment"

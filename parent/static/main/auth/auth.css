@@ -58,7 +58,7 @@ input[type='text'],input[type='password']{
 	width:85%;
 	outline:none;
 	color: white;
-	transition: 1s;
+	transition: 1s ease-out;
 	transform: scale(1.0);
 	border: 1px solid;
 	border-radius: 10px;
@@ -66,9 +66,12 @@ input[type='text'],input[type='password']{
 }
 input[type='checkbox']{
 	accent-color:#3af27b;
+	margin-top: 3px;
+	width: auto;
 }
 label{
 	padding-top:20px;
+	display: inline;
 	font-size:1.1em;
 }
 #remember input{
@@ -83,10 +86,33 @@ label{
 	width: 100px;
 }
 button[id^='next']{
-	margin: 7px;
+	margin-top: 7px;
 	border: none;
 	padding: 10px;
-	margin-left: 80%;
+	float: right;
+	margin-right: 14px;
+	background: #3af27b;
+	width: auto;
+	display: inline;
+	border-radius: 5px;
+}
+button[id^='prev']{
+	margin-top: 7px;
+	border: none;
+	padding: 10px;
+	display: none;
 	background: #3af27b;
 	border-radius: 5px;
+}
+input[type='submit']{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #3af27b;
+	border: none;
+	width: 90%;
+	transition: .5s ease-in-out;
+	border-radius: 2.5px;
+}
+input[type='submit']:hover{
+	background: #3af27b9c;
 }

@@ -13,7 +13,7 @@ def url_normal_checks(func_view):
 	def wrap(*args,**kwargs):
 	    if current_user.is_verified:
 	    	if not current_user.is_suspended:
-	    		pass
+	    		return redirect('/admin/section')
 	    else:
 	    	return redirect(url_for('not_verified'))
 	    return func_view(*args,**kwargs)

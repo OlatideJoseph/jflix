@@ -11,7 +11,16 @@
     width:95%;
     color: lightgrey;
     background-color: red;
-    border: 1.5px solid red;
+    border: 1.5px dotted red;
+    padding: 5px;
+    font-size: 15px;
+    transition: .5s ease-in-out;
+}
+.alert-warning{
+    width:95%;
+    color: lightgrey;
+    background-color: #ffff0021;
+    border: 1.5px dotted yellow;
     padding: 5px;
     font-size: 15px;
     transition: .5s ease-in-out;
@@ -19,9 +28,8 @@
 .alert-info{
 	width:95%;
     color: lightgrey;
-    background-color: #808080c7;
-    background-image: linear-gradient(to right,#808080c7);
-    border: 1.5px solid #04fbabb0;
+    background-color: #3af27b2e;
+    border: 1.5px dotted #3af27b;
     border-radius: 5px;
     padding: 5px;
     transition: .5s ease-in-out;
@@ -38,6 +46,7 @@
 	margin-left: 5px;
 	transition: .5s ease-in-out;
 	cursor: pointer;
+	background: none;
 }
 #close:hover{
 	color: red;

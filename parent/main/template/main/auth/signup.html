@@ -108,35 +108,15 @@
 				    {% endif %}
 		    		
 		    	</div>
+		    	<button id="prev-btn" type="button">
+		    		Prev
+		    	</button>
 		    	<button id="next-button" type="button">
 		    		Next
 		    	</button>
 		    	{{form.send_data(class="field")}}
 		    </form>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			function validate_input(field){
-				if (field.attr('type') == 'email'){
-					if (field.val()){
-						var email=field.val();
-					}
-				}else{
-					return null;
-				};
-			}
-			var btn = $('.field').hide();
-			var obj=$('#email-container').children();
-			$('#next-button').click(function(){
-				if (validate_input(obj.children('input')) == null){
-					var next=obj.parent().next();
-					next.toggleClass('field-hidden');
-					alert(next.html());
-					obj.parent().hide();
-					obj=obj.parent().next().children('input');
-				}
-			});
-		});
-	</script>
+	<script src="{{url_for('static',filename='js/auth/processor.js')}}" type="text/javascript"></script>
 </body>
 </html>
