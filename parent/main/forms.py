@@ -7,6 +7,7 @@ from parent.main.models import User
 
 match=r'[^*&_\-@=+^$",.<>!/\\]+[A-Za-z]+$'
 name_match=r'''^[A-Za-z0-9_]+$'''
+u_name=r'^[A-Za-z0-9_~`]+$'
 
 class UserUpdateForm(FlaskForm):
 	profile_image=FileField("UpdateProfile",
@@ -40,7 +41,7 @@ class UserUpdateForm(FlaskForm):
 
 class LoginForm(FlaskForm):
 	username=StringField("Username :*",validators=[DataRequired(),
-		Length(min=3,max=25),Regexp(name_match,message="Your username must be alphanumeric")])
+		Length(min=3,max=25),Regexp(u_name,message="Your username must be alphanumeric")])
 	password=PasswordField(None,validators=[DataRequired(),Length(min=8,max=16)])
 	remember=BooleanField("Remember me")
 	submit=SubmitField("Sign-In")
