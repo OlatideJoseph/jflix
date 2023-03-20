@@ -68,6 +68,8 @@
 	     		     {{form.remember(class='remember')}}
 	     		</div>
      		{% endif %}
+
+     		<span class="text">Need an account ? <a href="{{url_for('main.addc')}}" class="text-orange">Sign up</a></span>
      		
      		{{form.submit(id='form-post')}}
      	</form>
@@ -75,6 +77,9 @@
      <script type="text/javascript" defer>
      	$(document).ready(function(){
      		$('#form-post');
+     		$('#close').click(function(){
+				$(this).parent().parent().hide();
+			});//closes the page alert!
      	});
      </script>
 </body>

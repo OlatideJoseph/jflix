@@ -50,9 +50,10 @@
 
 		</div>
 	{% endmacro%}
-	{% macro flash_div()%}
+	{% macro flash_div(_from="page")%}
 			{%with msg =get_flashed_messages(with_categories=True)%}
-			    <div class="message">
+			    {% if _from == "page"%}
+				    <div class="message">
 				    {% if msg%}
 					    {% for category,message in msg%}
 					        <p class="alert-{{category}}">
@@ -60,8 +61,21 @@
 					        	<small id="close">&times</small>
 					        </p>
 					    {% endfor %}
-				{% endif %}
+					{% endif %}
 				</div>
+			    {% elif _from == "form"%}
+				    <div class="message">
+				    {% if msg%}
+					    {% for category,message in msg%}
+					        <p class="alert-{{category}}-form">
+					        	{{message}}
+					        	<small id="close">&times</small>
+					        </p>
+					    {% endfor %}
+					{% endif %}
+				</div>
+			    {% else%}
+			    {% endif %}
 			{% endwith %}
 	{% endmacro %}
 	{% macro footer()%}
