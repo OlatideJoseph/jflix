@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,4 +23,25 @@
 	</div>
 	</form>
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{url_for('uploader.static',filename='uploader/home.css')}}">
+	<title></title>
+</head>
+<body>
+	{% from "utils.html" import nav with context %}
+	{{nav()}}
+	<div class="upload-input">
+		<p>Producer home template</p>
+	    {{form.title()}}
+	    {{form.video()}}
+	    {{form.desc(placeholder="Enter a movie description",width='100',height='500')}}
+	    {{form.submit()}}
+	</div>
+</body>
+>>>>>>> 69055f3de1f41ab8d7aa81f732a965e330c0d931
 </html>

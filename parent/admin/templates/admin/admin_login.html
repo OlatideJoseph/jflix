@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {%extends 'admin/adminbase.html'%}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{{url_for('admin.static',filename='adminl.css')}}">
@@ -22,3 +23,29 @@
         </div>
     </div>
 {% endblock %}
+=======
+{%extends 'admin/adminbase.html'%}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('admin.static',filename='adminl.css')}}">
+    <title>Jflix Administration Login</title>
+{% endblock %}
+{% block body%}
+    <div class='content-setter'>
+        <div class="form">
+        	<h2>Python Flask Admin</h2>
+        	<form method="post" action="#" >
+        	    {{form.csrf_token()}}
+        	    {{form.email.label}}
+                </br>
+        	    {{form.email()}}
+                </br>
+        	    {{form.password.label}}
+                </br>
+        	    {{form.password()}}
+                </br>
+        	    {{form.send_email_pass()}}  		
+        	</form>
+        </div>
+    </div>
+{% endblock %}
+>>>>>>> 69055f3de1f41ab8d7aa81f732a965e330c0d931

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,4 +84,109 @@
      	});
      </script>
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Jflix | Login</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/auth/auth.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7ME25FB1T"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-K7ME25FB1T');
+	</script>
+</head>
+<body>
+	{% from "utils.html" import nav with context%}
+	{{nav()}}
+     <div class="login-controller">
+     	{%if form.errors%}
+	     	<form method="post" action="#" autocomplete="off">
+	     		<h2> Sign-In Jayflixer</h2>
+	     		{{form.csrf_token()}}
+	     		{% if form.username.errors%}
+	     		    <div id="user">
+		     			<label class="text-error">{{form.username.label}}</label>
+		     		     {{form.username(class='login-text border-error',placeholder='Username')}}
+		     		     {% for error in form.username.errors%}
+			     		     <span class="text-error">{{error}}</span>
+			     		{% endfor %}
+		     		</div>
+		     	{% else %}
+			     	 <div id="user">
+		     			<label class="text-error">{{form.username.label}}</label>
+		     		     {{form.username(class='login-text',placeholder='Username')}}
+		     		</div>
+	     		{% endif %}
+	     		{% if form.password.errors%}
+		     		<div id="password">
+		     		     <label class="text-error">{{form.password.label}}</label>
+		     		     {{form.password(class='login-text  border-error',placeholder='Password')}}
+		     		     {% for error in form.password.errors%}
+			     		     <span class="text-error">{{error}}</span>
+			     		{% endfor %}	
+		     		</div>
+		     	{%else%}
+			     	<div id="password">
+		     		     <label class="text-error">{{form.password.label}}</label>
+		     		     {{form.password(class='login-text',placeholder='Password')}}	
+		     		</div>
+	     		{% endif %}
+	     		{% if form.remember.errors%}
+		     		<div id="remember">
+		     			<label class="">{{form.remember.label}}</label>
+		     		     {{form.remember(class='remember border-error')}}
+		     		</div>
+		     		{% for error in form.remeber.errors%}
+				     	<span>{{error}}</span>
+		     		{% endfor %}
+		     	{% else %}
+			     	<div id="remember">
+		     			<label class="form-label">{{form.remember.label}}</label>
+		     		     {{form.remember(class='remember')}}
+		     		</div>
+	     		{% endif %}
+	     		
+	     		{{form.submit(id='form-post')}}
+	     	</form>
+	     {% else %}
+			<form method="post" action="#">
+				<h2> Sign-In Jayflixer</h2>
+				{{form.csrf_token()}}
+				<div id="user">
+					<label>{{form.username.label}}</label>
+				     {{form.username(class='login-text',placeholder='Username')}}
+				</div>
+				<div id="password">
+				     <label>{{form.password.label}}</label>
+				     {{form.password(class='login-text',placeholder='Password')}}	
+				</div>
+				<div id="remember">
+					<label>{{form.remember.label}}</label>
+				     {{form.remember(class='remember')}}
+				</div>
+				
+				{{form.submit(id='form-post')}}
+			</form>
+     	{% endif %}
+     </div>
+     <script type="text/javascript">
+     	/*
+     	$("#form-post").click((e)=>{
+     		var conf=prompt("Are you sure you want to submit ?");
+     		e.preventDefault();
+     		alert("Hello jquery",conf);
+     	});
+     	*/
+     </script>
+</body>
+>>>>>>> 69055f3de1f41ab8d7aa81f732a965e330c0d931
 </html>
