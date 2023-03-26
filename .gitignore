@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+jflixenv/
 
 # Distribution / packaging
 .Python
@@ -22,5 +23,5 @@ share/python-wheels/
 MANIFEST
 
 # Flask stuff:
-instance/
 .webassets-cache
+
