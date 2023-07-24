@@ -27,3 +27,4 @@ instance/
 jflixenv/
 Thumbs.db
 jumia.py
+*.mp4
