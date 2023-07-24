@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300&family=Source+Code+Pro:ital,wght@0,200;1,200&display=swap');
+body{
+	margin:0px;
+	background:#202124/*black*/;
+	padding: 0;
+	color:gray;
+}
+#nav{
+	background:black;/*#1b1c15;/*:whitesmoke*/
+	padding:10px;
+	font-family: 'Source code pro',monospace;
+}
+#nav ul{
+	background: #151521;
+	position:relative;
+	padding:10px ;
+	border-radius: 5px;
+	float:right;
+	width: 250px;
+}
+#nav li{
+	list-style-type: none;
+	padding:5px;
+	width: auto;
+}
+#nav span{
+	margin-top:5px;
+	font-size:25px;
+	font-family: 'Martian Mono', monospace;
+	
+}
+#nav span a{
+	text-decoration:none;
+	color:#3af27b;
+	text-shadow: 3px 3px 2px #3af27b;
+}
+#nav a:visited{
+    color: lightgrey;
+}
+#nav a{
+	text-decoration: none;
+    color:white;
+}
+#nav li:hover{
+	background: /*#1b1c15*/black;
+	border-radius:0 10px 10px 0;
+}
+
+#desc{
+	background: transparent;
+	padding: 10px;
+	outline: #151521;
+	font-family: 'Martian mono';
+	color: lightgrey;
+}
+
+.upload-input{
+	padding:15px;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	{%macro nav()%}
+		<div id="nav">
+			<span><a href="{{url_for('main.index')}}" id="appname">Jflix</a></span>
+			<ul class="nav-content">
+				{%if current_user.is_authenticated%}
+					{% if current_user.is_admin %}
+					   <li><a href="{{url_for('admin.home')}}">Admin</a></li>
+					{% endif %}
+					<li>
+						<a href="{{url_for('main.home',_external=True)}}">Home</a>
+					</li>
+		            <li>
+						<a href="{{url_for('main.movie')}}">Movie</a>
+					</li>
+		            <li>
+						<a href="#">Videos</a>
+					</li>
+		            <li>
+						<a href="#">Settings</a>
+					</li>
+					<li>
+						<a href="{{url_for('main.log_out_user')}}">Logout</a>
+					</li>
+				{% else %}
+				    {% if request.endpoint == 'main.login'%}
+			            <li>
+							<a href="{{url_for('main.login')}}" disabled='true'><button class="login" id="nav-btn-signin" disabled>Sign In</button></a>
+						</li>
+					{% else %}
+						<li>
+							<a href="{{url_for('main.login')}}"><button class="login" id="nav-btn-signin">Sign In</button></a>
+						</li>
+					{% endif %}
+					{% if request.endpoint == 'main.addc'%}
+			            <li>
+							<a href="#" disabled><button class="create" id="nav-btn-signup" disabled >Sign Up</button></a>
+						</li>
+					{% else %}
+						<li>
+							<a href="{{url_for('main.addc')}}"><button class="create" id="nav-btn-signup">Sign Up</button></a>
+						</li>
+					{% endif %}
+				{% endif %}
+			</ul>
+
+		</div>
+	{% endmacro%}
+	{% macro flash_div(_from="page")%}
+			{%with msg =get_flashed_messages(with_categories=True)%}
+			<!-- checks to know where the message was flashed from-->
+			    {% if _from == "page"%}
+				    <div class="message">
+				    {% if msg%}
+					    {% for category,message in msg%}
+					        <p class="alert-{{category}}">
+					        	{{message}}
+					        	<small id="close">&times;</small>
+					        </p>
+					    {% endfor %}
+					{% endif %}
+				</div>
+			    {% elif _from == "form"%}
+				    <div class="message">
+				    {% if msg%}
+					    {% for category,message in msg%}
+					        <p class="alert-{{category}}-form">
+					        	{{message}}
+					        	<small id="close">&times;</small>
+					        </p>
+					    {% endfor %}
+					{% endif %}
+				</div>
+			    {% else%}
+			    {% endif %}
+			{% endwith %}
+	{% endmacro %}
+	{% macro side_nav(title) %}
+	       <div class="side-nav">
+		       	<header>
+		       		{{title}}
+		       	</header>
+		       	<div class="base_content">
+		       		<ul class="nav-content">
+				{%if current_user.is_authenticated%}
+					{% if current_user.is_admin %}
+					   <li><a href="{{url_for('admin.home')}}">Admin</a></li>
+					{% endif %}
+					<li>
+						<a href="{{url_for('main.home',_external=True)}}">Home</a>
+					</li>
+		            <li>
+						<a href="{{url_for('main.movie')}}">Movie</a>
+					</li>
+		            <li>
+						<a href="#">Videos</a>
+					</li>
+		            <li>
+						<a href="#">Settings</a>
+					</li>
+					<li>
+						<a href="{{url_for('main.log_out_user')}}">Logout</a>
+					</li>
+				{% else %}
+				    {% if request.endpoint == 'main.login'%}
+			            <li>
+							<a href="{{url_for('main.login')}}" disabled='true'><button class="login" id="nav-btn-signin" disabled>Sign In</button></a>
+						</li>
+					{% else %}
+						<li>
+							<a href="{{url_for('main.login')}}"><button class="login" id="nav-btn-signin">Sign In</button></a>
+						</li>
+					{% endif %}
+					{% if request.endpoint == 'main.addc'%}
+			            <li>
+							<a href="#" disabled><button class="create" id="nav-btn-signup" disabled >Sign Up</button></a>
+						</li>
+					{% else %}
+						<li>
+							<a href="{{url_for('main.addc')}}"><button class="create" id="nav-btn-signup">Sign Up</button></a>
+						</li>
+					{% endif %}
+				{% endif %}
+			</ul>
+		       	</div>
+	       </div>
+	{% endmacro %}
+	{% macro footer()%}
+		<footer class='jay-foot'>
+			<p>
+				Entertainment Central | Bringing you the latest in movies, TV shows, music, and pop culture. Stay updated, stay entertained. © 2023 Entertainment Central.
+			</p>
+		</footer>
+	{% endmacro %}
+
+</body>
+</html>

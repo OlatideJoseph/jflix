@@ -1,0 +1,22 @@
+{% extends "main/base.html" %}
+{% block head %}
+    <title>Latest Movies And News</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='posts/post.css')}}">
+{% endblock %}
+{% block content%}
+{% for post in posts%}
+    <div>
+    	<h2>
+            {{post.title}} 
+        </h2>
+        <span>
+            <small>
+                | {{post.date_written.strftime('%Y-%m-%d')}} | {{post.date_written.strftime('%H:%M')}} 
+            </small>
+        </span>
+    	<blockquote>
+    		<p>{{ post.text}}</p>
+    	</blockquote>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome Home</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/index.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='main/utils.css')}}">
+	<!-- Google tag (gtag.js) -->
+	<link rel="icon" type="images/x-icon" href="{{url_for('main.favicon')}}">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7ME25FB1T"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.6.3.min.js')}}"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-K7ME25FB1T');
+	</script>
+</head>
+<body id="ajx-bd">
+	{% from "utils.html" import nav,footer,flash_div,side_nav with context%}
+	{{nav()}}
+	<div class="body-side-setter">
+		
+	
+		{% if current_user.is_authenticated%}
+			{{side_nav('Home')}}
+		{% endif %}
+		<div id="intro-text">
+			{{flash_div()}}
+			<p>
+		        <img id='first-image' width="640" height="480"  src="{{url_for('static',filename='main/images/index-unsplash.webp')}}" alt="movie">         	 
+				Welcome to our online video entertainment site, where you can immerse yourself in a world of endless entertainment and limitless possibilities! We are thrilled to offer you a wide selection of videos that cater to all your entertainment needs, whether you are looking for the latest movies, TV shows, documentaries, or viral videos that are taking the internet by storm.
+
+				Our platform is designed to provide you with a seamless and intuitive experience, making it easy to find and enjoy the content you love. We are committed to bringing you the best of the best, and our team of curators work tirelessly to source and deliver the most engaging and exciting content from all corners of the internet.
+
+				Whether you want to unwind after a long day at work, catch up on your favorite TV show, or explore new and exciting worlds through film, our platform has something for everyone. So, grab your popcorn and get ready to embark on a journey of entertainment, exploration, and discovery - all from the comfort of your own home. We can't wait to take you on this exciting journey!
+			</p>
+		</div>
+		<div id="intro-image">
+			
+		</div>
+	</div>
+    {% if current_user.is_authenticated %}
+    {% else %}
+	{{footer()}}
+	{% endif %}
+	<script type="text/javascript">
+		/*
+		var list=[
+				'/static/main/images/index-unsplash2.webp',
+				'/static/main/images/index-unsplash.webp',
+				'/static/main/images/index-unsplash3.webp'
+				];
+		var img=$('#first-image');
+		$(document).ready(function(){
+			$('#close').click(function(){
+				$(this).parent().parent().hide();
+			});
+			var images=0;
+			var next=images
+			const change_image=()=>{
+				if (next === list.length-1){
+					next=images;
+					img.attr({'src':list[next]});
+				}else{
+					next++;
+					img.attr({'src':list[next]});
+				}
+			}
+			setInterval(change_image,5000);
+		});// function ending*/
+		
+	</script>
+	<script type="text/javascript">
+		$('#close').click(function(){
+				$(this).parent().parent().hide();
+			});
+	</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+.message{
+	padding-left: 10px;
+	margin-left: 10px;
+	transition: .5s ease-in-out;
+}
+.form-error{
+	border: 1.5px solid red !important;
+}
+.text-orange{
+    color: orange;
+}
+a[class^='text-orange']:hover{
+    color: red;
+}
+a[class^='text-orange']:visited{
+    color: orange;
+}
+.text{
+    margin: 10px;
+}
+.alert-error{
+    width:95%;
+    color: lightgrey;
+    background-color: #ff000033;
+    border: 1.5px dotted red;
+    padding: 5px;
+    font-size: 15px;
+    transition: .5s ease-in-out;
+}
+.alert-warning{
+    width:95%;
+    color: lightgrey;
+    background-color: #ffa50042;
+    border: 1.5px dotted orange;
+    padding: 5px;
+    font-size: 15px;
+    transition: .5s ease-in-out;
+}
+.alert-info{
+	width:95%;
+    color: lightgrey;
+    background-color: #3af27b2e;
+    border: 1.5px dotted #3af27b;
+    padding: 5px;
+    transition: .5s ease-in-out;
+    font-size: 15px;
+}
+.alert-info-form{
+    color: lightgrey;
+    background-color: #3af27b2e;
+    border: 2px solid #3af27b;
+    border-radius: 3px;
+    transition: .5s ease-in-out;
+}
+.alert-error-form{
+    width:95%;
+    color: lightgrey;
+    background-color: #ff000033;
+    border: 2px solid red;
+    padding: 3px;
+    transition: .5s ease-in-out;
+
+}
+.alert-warning-form{
+    width:95%;
+    color: lightgrey;
+    background-color: #ffa50042;
+    border: 2px dotted orange;
+    padding: 3px;
+    transition: .5s ease-in-out;
+
+}
+.text-error{
+	color: red;
+	margin: 10px;
+}
+#close{
+	display: inline;
+	float: right;
+	font-size: 20px;
+	margin-left: 5px;
+	transition: .5s ease-in-out;
+	cursor: pointer;
+	background: none;
+}
+#close:hover{
+	color: red;
+}
+@media screen and (max-width: 450px){
+    ul.nav-content{
+        display: none;
+    }
+}

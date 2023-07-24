@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{url_for('uploader.static',filename='uploader/home.css')}}">
+	<title></title>
+</head>
+<body>
+	{% from "utils.html" import nav with context %}
+	{{nav()}}
+	<form enctype="multipart/form-data" action="#" method="post">
+		<div class="upload-input">
+			{% if form.errors %}
+			    {{form.errors}}
+			{% endif %}
+		<p>Producer home template</p>
+	    {{form.title()}}
+	    {{form.video()}}
+	    {{form.desc(placeholder="Enter a movie description",width='100',height='500')}}
+	    {{form.submit()}}
+	</div>
+	</form>
+</body>
+</html>

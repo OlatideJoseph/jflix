@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block head %}
+    <title>Write About a movie,blog,post,news ...</title>
+{% endblock %}
+{% block content%}
+    <div>
+        <form method="post" action="#" enctype="multipart/form-data">
+            {{form.csrf_token()}}
+            {{form.title.label}}
+            <p>{{form.title()}}</p>
+            {{form.content.label}}
+            <p>{{form.content(rows=25,cols=25)}}</p>
+            <p>{{form.editable}}</p>
+            {{form.images()}}
+            {{form.video_clip()}}
+            {{form.submit()}}
+        </form>
+    </div>
+{% endblock %}

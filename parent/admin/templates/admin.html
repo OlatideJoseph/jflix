@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="{{url_for('admin.static',filename='admin.css')}}">
+	<title>Admin {{user.first_name | title}} {{user.middle_name | title}} {{user.last_name | title}}</title>
+	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.6.3.min.js')}}"></script>
+</head>
+<body>
+   	<div id="side-nav" class="side-nav">
+   		<h2>Jflix Side Nav</h2>
+   		<h4>Sites</h4>
+   		<p>
+   			{% for app,ends in dict_url.items()%}
+	   			<header id="{{app}}">{{app}}</header>
+			    <ul id="{{app}}-urls">
+			    	{% for end in ends%}
+			    	    {% if not (end in ['authenticate','movie_detail','static','check_user_exists'])%}
+				    	   <li> <a href="{{url_for(app+'.'+end)}}">{{end}}</a></li>
+			    	    {% endif %}
+			    	{% endfor %}
+			    </ul>
+   			{% endfor %}
+   		</p>
+
+
+   	</div>
+   	<div class="side2">
+   		
+   	</div>
+   	<script type="text/javascript">
+   		$(document).ready(function(){
+   			$('div#side-nav').on('click',function(){
+   				$(this).toggleClass('up');
+   			});
+   			$('#admin').click(function(){
+                $(this).next().toggleClass('show');
+   			});
+   		});
+   	</script>
+</body>
+</html>
