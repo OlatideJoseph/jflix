@@ -174,32 +174,59 @@ Best regards,
 		tjson=json.dumps(json_user,ensure_ascii=True)
 		return tjson
 
-
 class Movie(db.Model):
-	__tablename__="movie"
-	id=db.Column(db.Integer,primary_key=True)
-	title=db.Column(db.String(150),nullable=False)
-	hashed_id=db.Column(db.String,unique=True)
-	detail=db.Column(db.Text,nullable=False)
-	category_type=db.Column(db.PickleType,default=['action&drama','sci-fi'])
-	category=db.Column(db.String,default="action",nullable=False)
-	writer=db.Column(db.String(150),nullable=False)
-	user_id=db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-	movie_like=db.relationship('MovieLike',backref='movie_liked',lazy=True)
-	comments=db.relationship("Comment",backref="movies",lazy=True)
+    __tablename__="movie"
+    id=db.Column(db.Integer, primary_key=True)
+    title=db.Column(db.String(150), nullable=False)
+    hashed_id=db.Column(db.String, unique=True)
+    detail=db.Column(db.Text, nullable=False)
+    category_type=db.Column(db.PickleType, default=['action&drama','sci-fi'])
+    category=db.Column(db.String, default="action", nullable=False)
+    writer=db.Column(db.String(150), nullable=False)
+    user_id=db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    movie_like=db.relationship('MovieLike', backref='movie_liked', lazy=True)
+    comments=db.relationship("Comment", backref="movies", lazy=True)
 
 
-	def tojson(self) -> dict:
-		movie_dict={
-		"id":self.id,
-		"title":self.title,
-		"hashed_id":self.hashed_id,
-		"detail":self.detail,
-		"category_type":self.category_type
-		}
-		movie_dict=json.dumps(movie_dict,ensure_ascii=True,indent=4)
+    def to_dict(self) -> dict:
+        movie_dict={
+            "id":self.id,
+            "title":self.title,
+            "hashed_id":self.hashed_id,
+            "detail":self.detail,
+            "category_type":self.category_type
+        }
+        movie_dict=json.dumps(movie_dict,ensure_ascii=True,indent=4)
 
-		return movie_dict
+        return movie_dict
+    
+    @classmethod
+    def pagination_dict(cls, # Converts Paginated Object By Filter TO DICT
+        per_page=20,
+        page: int = 1,
+        category = "action",
+        **kwargs) -> dict:
+        pag_obj = cls.query.filter_by(category=category).paginate(
+            per_page = per_page,
+            page = page,
+            shell = False,
+            **kwargs)
+        dict_list=[]
+        for movie in pag_obj:
+            movie_dict={
+                "id": movie.id,
+                "title": movie.title,
+                "hashed_id": movie.hashed_id,
+                "detail": movie.detail,
+                "category_type": movie.category_type
+            }
+            dict_list.append(movie_dict)
+        try:
+            if shell:
+                import pprint
+                return pprint.format(dict_list)
+        except ImportError:
+            return dict_list
 
 class Comment(db.Model):
     __tablename__="comment"
