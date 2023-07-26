@@ -18,92 +18,89 @@ def load_user(user_id):
 	return User.query.get(int(user_id))
 
 
-
-
-
 class AnnonymousUser(db.Model,AnonymousUserMixin):
 	id=db.Column(db.Integer,primary_key=True)
 	user_agent=db.Column(db.String)
 	ip_address=db.Column(db.Integer)
 	location=db.Column(db.String)
 
-
-
-
 class User(db.Model,UserMixin):
-	""" A User class for the jflix user with admin features """
-	__tablename__="user"
-	id=db.Column(db.Integer,primary_key=True)
-	first_name=db.Column(db.String(50),nullable=False)
-	middle_name=db.Column(db.String(50),nullable=True)
-	last_name=db.Column(db.String(50),nullable=False)
-	image_name=db.Column(db.String)
-	img_url=db.Column(db.String)
-	email=db.Column(db.String(150),nullable=False,unique=True)
-	username=db.Column(db.String(150),nullable=False,unique=True)
-	password=db.Column(db.Text,nullable=False)
-	dob=db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
-	gender=db.Column(db.String,default="Select",nullable=False)
-	is_admin=db.Column(db.Boolean,default=False,nullable=False)
-	is_verified=db.Column(db.Boolean,default=False)
-	is_suspended=db.Column(db.Boolean,default=False)
-	posts=db.relationship('Post',backref='writer',lazy=True)
-	movie=db.relationship('Movie',backref='producer',lazy=True)
-	movie_like=db.relationship('MovieLike',backref='liker',lazy=True)
-	comments=db.relationship('Comment',backref="users",lazy=True)
-	comment_liker=db.relationship('CommentLike',backref='liker',lazy=True)
+    """ A User class for the jflix user with admin features """
+    __tablename__="user"
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    middle_name = db.Column(db.String(50), nullable=True)
+    last_name = db.Column(db.String(50), nullable=False)
+    image_name = db.Column(db.String)
+    img_url = db.Column(db.String)
+    email = db.Column(db.String(150), nullable=False, unique=True)
+    username = db.Column(db.String(150), nullable=False, unique=True)
+    password = db.Column(db.Text, nullable=False)
+    dob = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    gender = db.Column(db.String, default="Select", nullable=False)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+    is_verified = db.Column(db.Boolean, default=False)
+    is_suspended = db.Column(db.Boolean, default=False)
+    posts = db.relationship('Post', backref='writer', lazy=True)
+    movie = db.relationship('Movie', backref='producer', lazy=True)
+    movie_like = db.relationship('MovieLike', backref='liker', lazy=True)
+    comments = db.relationship('Comment', backref="users", lazy=True)
+    comment_liker = db.relationship('CommentLike', backref='liker', lazy=True)
+    token = db.relationship("AuthJWTToken", backref = 'user', lazy = True)
 
-	@staticmethod
-	def generate_password(p):
-		password=gph(p)
-		return password
+    @staticmethod
+    def generate_password(p):
+        password=gph(p)
 
-	def check_password(self,p):
-		password=cph(self.password,p)
-		return password
+        return password
 
-	def suspend(self):
-		self.is_suspended=True
-		db.session.add(self)
-		db.session.commit()
+    def check_password(self,p):
+        password=cph(self.password,p)
+
+        return password
+
+    def suspend(self):
+        self.is_suspended=True
+        db.session.add(self)
+        db.session.commit()
 
 
-	def send_mail(self,email=None,html=None,title=None,body=None):
-		from parent import create_app
-		if email:
-			msg=Message("Test Email Address",sender='jflix.com',recipients=[email])
-			msg.html="<h1>Hello There Mail System</h1>"
-			mail.send(msg)
-		else:
-			if html and title:
-				msg=Message(title,sender='jflix.com',recipients=[f'{self.email}'])
-				msg.html=html
-			elif body and title:
-				msg=Message(title,sender='Jflix.com',recipients=[f'{self.email}'])
-				msg.body=body
+    def send_mail(self,email=None,html=None,title=None,body=None):
+        from parent import create_app
+        if email:
+            msg=Message("Test Email Address",sender='jflix.com',recipients=[email])
+            msg.html="<h1>Hello There Mail System</h1>"
+            mail.send(msg)
+        else:
+            if html and title:
+                msg=Message(title,sender='jflix.com',recipients=[f'{self.email}'])
+                msg.html=html
+            elif body and title:
+                msg=Message(title,sender='Jflix.com',recipients=[f'{self.email}'])
+                msg.body=body
 
-			else:
-				msg=Message("Test Email Address",sender='jflix.com',recipients=[f'{self.email}'])
-				msg.html="<h1>Hello There Mail System</h1>"
-			app=create_app()
-			with app.app_context() as ctx:
-				ctx.push()
-				mail.send(msg)
-		return 
+            else:
+                msg=Message("Test Email Address",sender='jflix.com',recipients=[f'{self.email}'])
+                msg.html="<h1>Hello There Mail System</h1>"
+            app=create_app()
+            with app.app_context() as ctx:
+                ctx.push()
+                mail.send(msg)
+        return 
 
-	def send_async_email(self,*args,**kwargs):
-		func=self.send_mail
-		Thread(target=func,args=args,kwargs=kwargs).start()
-		return None
+    def send_async_email(self,*args,**kwargs):
+        func=self.send_mail
+        Thread(target=func,args=args,kwargs=kwargs).start()
+        return None
 
-	def generate_admin_token(self):
-		d=datetime.utcnow()+dt.timedelta(minutes=10)
-		serial={'id':self.id,"exp":d}
-		s=Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm="HS256")
-		return s
-	def send_admin_mail(self):
-		token=self.generate_admin_token()
-		body=f"""
+    def generate_admin_token(self):
+        d=datetime.utcnow()+dt.timedelta(minutes=10)
+        serial={'id':self.id,"exp":d}
+        s=Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm="HS256")
+        return s
+    def send_admin_mail(self):
+        token=self.generate_admin_token()
+        body=f"""
 Dear Site Admin,
 
 I hope this email finds you well. I am writing to bring to your attention a concerning matter regarding the security of your website.
@@ -121,58 +118,72 @@ Thank you for your time and attention.
 Best regards,
 {self.first_name.title()}
 
-		"""
-		self.send_async_email(title="Jflix Admin Authentication",body=body)
-		return None
+        """
+        self.send_async_email(title="Jflix Admin Authentication",body=body)
+        return None
 
-	def verify_self(self):
-		self.is_verified=True
-		db.session.commit()
-		msg=Message(f"Activated {self.first_name} @ Jflix.com",sender="jflix.com",
-			recipients=[f'{self.email}'])
-		msg.html=render_template('mails/verify_user.html')
-		mail.send(msg)
+    def verify_self(self):
+        self.is_verified=True
+        db.session.commit()
+        msg=Message(f"Activated {self.first_name} @ Jflix.com",sender="jflix.com",
+            recipients=[f'{self.email}'])
+        msg.html=render_template('mails/verify_user.html')
+        mail.send(msg)
 
-	@classmethod
-	def fromdict(cls,obj):
-		if obj:
-			user=cls.query.get(obj.get('id'))
-			if user:
-			   return user
-		user=cls(first_name=obj.get('firstName').title(),
-			maiden_name=obj.get('maidenName').title(),
-			last_name=obj.get('lastName').title(),
-			email=obj.get('email'),username=obj.get('username'),
-			password=gph(obj.get('password')))
-		db.session.add(user)
-		print(user.username)
-		db.session.commit()
-		return user
+    @classmethod
+    def fromdict(cls,obj):
+        if obj:
+            user=cls.query.get(obj.get('id'))
+            if user:
+               return user
+        user=cls(first_name=obj.get('firstName').title(),
+            maiden_name=obj.get('maidenName').title(),
+            last_name=obj.get('lastName').title(),
+            email=obj.get('email'),username=obj.get('username'),
+            password=gph(obj.get('password')))
+        db.session.add(user)
+        print(user.username)
+        db.session.commit()
+        return user
 
 
 
-	def tojson(self):
-		import json
-		json_user={
-			"id":self.id,
-			"username":self.username,
-			"password":self.password,
-			"first_name":self.first_name,
-			"last_name":self.last_name,
-			"middlename":self.maiden_name,
-			"is_verified":self.is_verified,
-			"is_admin":self.is_admin,
-			"gender":self.gender,
-			"date_of_birth":self.dob.strftime("%Y-%m-%d"),
-			"movies":{
-				"m":len(self.movie)
-			},
-			"comments":{
-				"c":len(self.comments)
-			}
-		}
-		tjson=json.dumps(json_user,ensure_ascii=True)
-		return tjson
+    def tojson(self):
+        import json
+        json_user={
+            "id": self.id,
+            "username": self.username,
+            "password": self.password,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "middlename": self.maiden_name,
+            "is_verified": self.is_verified,
+            "is_admin": self.is_admin,
+            "gender": self.gender,
+            "date_of_birth": self.dob.strftime("%Y-%m-%d"),
+            "movies": {
+                "m": len(self.movie)
+            },
+            "comments": {
+                "c": len(self.comments)
+            }
+        }
+        tjson=json.dumps(json_user, ensure_ascii=True)
+        return tjson
+
+
+class AuthJWTToken(db.Model):
+    id = db.Column(db.Integer, primary_key = True, unique = True)
+    token = db.Column(db.Text, nullable = False, unique = True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable = False)
+
+    @staticmethod
+    def generate_auth_token(_id: int,expires: dt.timedelta = dt.timedelta(days=365)):
+        d = datetime.utcnow()+expires
+        serial = {'id':_id,"exp":expires}
+        token = Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm="HS256")
+
+        return token
 
 class Movie(db.Model):
     __tablename__="movie"

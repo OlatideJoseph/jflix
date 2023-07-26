@@ -20,8 +20,11 @@ def check_user_exists(username):
 	if not usr.first():
 		return jsonify(user=username,message='User Does Not Exist',code='error')
 	return jsonify(code='success')
+
 @ajax.post('/check_user_data')
 def check_data():
 	if request.is_json():
 		json=request.get_json()
 	return make_response
+
+#@
