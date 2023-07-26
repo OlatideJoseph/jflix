@@ -19,10 +19,10 @@ def load_user(user_id):
 
 
 class AnnonymousUser(db.Model,AnonymousUserMixin):
-	id=db.Column(db.Integer,primary_key=True)
-	user_agent=db.Column(db.String)
-	ip_address=db.Column(db.Integer)
-	location=db.Column(db.String)
+	id = db.Column(db.Integer,primary_key = True)
+	user_agent = db.Column(db.String)
+	ip_address = db.Column(db.Integer)
+	location = db.Column(db.String)
 
 class User(db.Model,UserMixin):
     """ A User class for the jflix user with admin features """
@@ -68,39 +68,39 @@ class User(db.Model,UserMixin):
     def send_mail(self,email=None,html=None,title=None,body=None):
         from parent import create_app
         if email:
-            msg=Message("Test Email Address",sender='jflix.com',recipients=[email])
-            msg.html="<h1>Hello There Mail System</h1>"
+            msg = Message("Test Email Address",sender = 'jflix.com',recipients = [email])
+            msg.html = "<h1>Hello There Mail System</h1>"
             mail.send(msg)
         else:
             if html and title:
-                msg=Message(title,sender='jflix.com',recipients=[f'{self.email}'])
-                msg.html=html
+                msg = Message(title,sender = 'jflix.com',recipients = [f'{self.email}'])
+                msg.html = html
             elif body and title:
-                msg=Message(title,sender='Jflix.com',recipients=[f'{self.email}'])
-                msg.body=body
+                msg = Message(title,sender = 'Jflix.com',recipients = [f'{self.email}'])
+                msg.body = body
 
             else:
-                msg=Message("Test Email Address",sender='jflix.com',recipients=[f'{self.email}'])
-                msg.html="<h1>Hello There Mail System</h1>"
-            app=create_app()
+                msg = Message("Test Email Address",sender = 'jflix.com',recipients = [f'{self.email}'])
+                msg.html = "<h1>Hello There Mail System</h1>"
+            app = create_app()
             with app.app_context() as ctx:
                 ctx.push()
                 mail.send(msg)
         return 
 
     def send_async_email(self,*args,**kwargs):
-        func=self.send_mail
-        Thread(target=func,args=args,kwargs=kwargs).start()
+        func = self.send_mail
+        Thread(target = func,args = args,kwargs = kwargs).start()
         return None
 
     def generate_admin_token(self):
-        d=datetime.utcnow()+dt.timedelta(minutes=10)
-        serial={'id':self.id,"exp":d}
-        s=Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm="HS256")
+        d = datetime.utcnow()+dt.timedelta(minutes = 10)
+        serial = {'id':self.id,"exp":d}
+        s = Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm = "HS256")
         return s
     def send_admin_mail(self):
-        token=self.generate_admin_token()
-        body=f"""
+        token = self.generate_admin_token()
+        body = f"""
 Dear Site Admin,
 
 I hope this email finds you well. I am writing to bring to your attention a concerning matter regarding the security of your website.
