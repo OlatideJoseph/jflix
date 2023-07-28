@@ -35,7 +35,7 @@ def create_app():
 	from parent.ajax.urls import ajax
 	app.register_blueprint(ajax,url_prefix="/browser/ajax/1.0")
 	#Application context processor
-	from parent.main.models import User,Post,Comment
+	from parent.main.models import User,Post,Comment,AuthJWTToken
 	from parent.admin.models import Admin
 	#context part
 	@app.context_processor
@@ -43,6 +43,13 @@ def create_app():
 		return dict(user=current_user)
 	@app.shell_context_processor
 	def load_context():
-		return {'mail':mail,'User':User,'Post':Post,'Comment':Comment,'Admin':Admin}
+		return {
+			'mail' : mail,
+			'User' : User,
+			'Post' : Post,
+			'Comment' : Comment,
+			'Admin' : Admin,
+			'Token' : AuthJWTToken,
+		 }
 
 	return app

@@ -68,7 +68,7 @@ def login(): #Application Login Route
 @log_out_required
 def logout():
 	username=request.args.get('username')
-	flash(f'User {current_user.username} has been logged out !','Warning')
+	flash(f'User {username} has been logged out !','warning')
 	return render_template('users/logged-out.html',username=username)
 
 @main.route('/sign-out')

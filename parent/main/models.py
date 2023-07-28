@@ -177,13 +177,33 @@ class AuthJWTToken(db.Model):
     token = db.Column(db.Text, nullable = False, unique = True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable = False)
 
+    def __str__(self):
+        return f"<Auth:{self.token[15]}..."
+
+    def __repr__(self):
+        return "<Auth:%r..." %self.token[:15]
+
     @staticmethod
-    def generate_auth_token(_id: int,expires: dt.timedelta = dt.timedelta(days=365)):
+    def generate_auth_token(_id: int,expires: dt.timedelta = dt.timedelta(days=365)) -> str:
         d = datetime.utcnow()+expires
-        serial = {'id':_id,"exp":expires}
+        serial = {'id':_id,"exp":d}
         token = Serialize.encode(serial,current_app.config['SECRET_KEY'],algorithm="HS256")
 
         return token
+
+    def generate_token(self):
+        '''\
+            Generate auth token for the current instance class using the method above
+        '''
+        token = self.generate_auth_token(
+            _id = self.user.id,
+            )
+        return token
+
+    def decode_auth_token(self) -> dict:
+        token = self.token
+        decoded = Serialize.decode(token)
+        return decode
 
 class Movie(db.Model):
     __tablename__="movie"
